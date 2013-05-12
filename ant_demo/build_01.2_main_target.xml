@@ -2,8 +2,10 @@
 
 <project name="Hello_World" default="Echo" basedir=".">
     
-    <target name="Echo" description="Just print 'Hello world'''.">
+    <target name="Echo" description="Just print 'Hello world'.">
         <echo message="Hello world! I'm ant."></echo>
     </target>
-
+    
+    <target name="EchoSubTarget">
+    </target>
 </project>
