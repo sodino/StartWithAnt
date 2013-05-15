@@ -1,0 +1,25 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="TargetDepends" default="D" basedir=".">
+    
+    <target name="A" description="First Class A">
+    	<property name="a.value" value="Apple" />
+        <echo message="I'm a ${a.value}."></echo>
+    </target>
+
+    <target name="B" description="First Class B" depends="A">
+        <property name="b.value" value="Bee" />
+        <echo message="I'm a ${b.value}."></echo>
+    </target>
+    
+    <target name="C" description="First Class C" depends="B">
+    	<property name="c.value" value="Car" />
+        <echo message="I'm a ${c.value}."></echo>
+    </target>
+    
+    <target name="D" description="First Class D" depends="C,B,A">
+        <echo message="a.value=${a.value}"/>
+        <echo message="b.value=${b.value}"/>
+        <echo message="c.value=${c.value}"/>
+    </target>
+</project>
