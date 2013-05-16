@@ -1,0 +1,69 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="SetProperties" default="Set" basedir=".">
+	<!-- 第一种方式：直接声明且赋值 -->
+	<property name="name1.1" value="set by value"/>
+	<property name="name1.2">Nested a text</property>
+	
+	<!-- 第二种方式：路径相关  与指定文件相关 -->
+    <property name="name2.1" location="README.md" relative="true" basedir="..\"/>
+	
+	<!-- 第二种方式：路径相关  与指定文件类型相关 
+		列出当前目录下所有.xml文件的绝对路径 -->
+	<path id="all.xml.path">
+		<fileset dir=".">
+			<include name="**/*.xml"/>
+		</fileset>
+	</path>
+	<property name="name2.2" refid="all.xml.path"/>
+	
+	
+	<!-- 第三种方式：从文件导入  直接从properties文件读取 -->
+	<property file="res_03.1property.01.properties"/>
+	<!-- 第三种方式：从类路径设置中导入  从jar中的properties文件读取 -->	
+	<property classpath="properties.jar" resource="lab/sodino/res_03.1property.02.properties"/>
+	
+	<!-- 第四种方式：从预设的环境变量中读取 -->
+	<property environment="env"/>
+	
+		
+	
+	<!-- 第五种方式：从网络链接处直接获取 如果该网络不通，会导致一直卡死-->
+	<!--
+	<property url="http://www.mysite.com/bla/props/foo.properties"/>
+	-->
+	
+	
+    <target name="Set">
+		<echo>property type 1:</echo>
+        <echo message="${name1.1}"></echo>
+        <echo message="${name1.2}"></echo>
+		<echo>---- ---- ---- ----</echo>
+		
+		<echo>property type 2:</echo>
+        <echo message="${name2.1}"></echo>
+        <echo message="${name2.2}"></echo>
+		<echo>---- ---- ---- ----</echo>
+		
+		<echo>property type 3:</echo>
+		<echo message="${name3.1_web}"></echo>
+		<echo message="${name3.1_im}"></echo>
+		
+		<echo message="${name3.2_machine}"></echo>		
+		<echo message="${name3.2_mobile}"></echo>
+		<echo>---- ---- ---- ----</echo>
+		
+		<echo>property type 4:</echo>
+		<!-- 请确保有一环境变量名为"OS"，可以用"env.java_home"等替代，注意大小写 -->
+		<echo message="${env.OS}"></echo>
+		<echo>---- ---- ---- ----</echo>
+		
+		<!-- 第六种方式：从执行命令中获取结果-->
+		<exec executable="hostname" outputproperty="name5.host.name"></exec>
+		<echo>property type 6:</echo>
+		<echo message="${name5.host.name}"></echo>
+		<echo>---- ---- ---- ----</echo>
+		
+    </target>
+
+</project>
