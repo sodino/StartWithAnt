@@ -61,9 +61,17 @@
 		<echo>---- ---- ---- ----</echo>
 		
 		<!-- 第六种方式：从执行命令中获取结果-->
-		<exec executable="hostname" outputproperty="name5.host.name"></exec>
+		<!-- 获得正确的结果 -->
+		<exec executable="hostname"
+			outputproperty="name5.host.name"></exec>
 		<echo>property type 6:</echo>
 		<echo message="${name5.host.name}"></echo>
+		<!-- 获得失败的结果 -->		
+		<exec executable="jar"
+				errorproperty="name5.error">
+            <arg value="error.arguments"/>
+        </exec>
+		<echo message="${name5.error}"></echo>
 		<echo>---- ---- ---- ----</echo>
 		
     </target>
