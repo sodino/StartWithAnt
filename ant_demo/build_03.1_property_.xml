@@ -20,7 +20,9 @@
 	
 	<!-- 第三种方式：从文件导入  直接从properties文件读取 -->
 	<property file="res_03.1property.01.properties"/>
-	<!-- 第三种方式：从类路径设置中导入  从jar中的properties文件读取 -->	
+	<!-- 第三种方式：从类路径设置中导入  从jar中的properties文件读取
+		请确保properties.jar在basedir路径下
+	-->	
 	<property classpath="properties.jar" resource="lab/sodino/res_03.1property.02.properties"/>
 	
 	<!-- 第四种方式：从预设的环境变量中读取 -->
