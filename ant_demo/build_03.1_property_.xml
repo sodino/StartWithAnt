@@ -28,12 +28,13 @@
 	<!-- 第四种方式：从预设的环境变量中读取 -->
 	<property environment="env"/>
 	
-		
 	
-	<!-- 第五种方式：从网络链接处直接获取 如果该网络不通，会导致一直卡死-->
-	<!--
-	<property url="http://www.mysite.com/bla/props/foo.properties"/>
-	-->
+	
+	<!-- 第五种方式：会在执行target之前去联网获取
+		当在target内声明时，则只会在运行到声明时，才会去获取
+		从网络链接处直接获取 如果该网络不通，导致一直卡死或直接抛异常-->
+	<property url="http://www.sodino.com/res_03.1property.url.properties"/>
+	
 	
 	
     <target name="Set">
@@ -51,7 +52,7 @@
 		<echo message="${name3.1_web}"></echo>
 		<echo message="${name3.1_im}"></echo>
 		
-		<echo message="${name3.2_machine}"></echo>		
+		<echo message="${name3.2_machine}"></echo>
 		<echo message="${name3.2_mobile}"></echo>
 		<echo>---- ---- ---- ----</echo>
 		
@@ -60,14 +61,20 @@
 		<echo message="${env.OS}"></echo>
 		<echo>---- ---- ---- ----</echo>
 		
+		<echo>property type 5:</echo>
+		<echo message="${name5.1_site}"></echo>
+		<echo message="${name5.2_project}"></echo>
+		<echo>---- ---- ---- ----</echo>
+
 		<!-- 第六种方式：从执行命令中获取结果-->
 		<!-- 获得正确的结果 -->
 		<exec executable="hostname"
 			outputproperty="name5.host.name"></exec>
 		<echo>property type 6:</echo>
 		<echo message="${name5.host.name}"></echo>
-		<!-- 获得失败的结果 -->		
+		<!-- 获得失败的结果 -->
 		<exec executable="jar"
+
 				errorproperty="name5.error">
             <arg value="error.arguments"/>
         </exec>
@@ -75,5 +82,4 @@
 		<echo>---- ---- ---- ----</echo>
 		
     </target>
-
 </project>
