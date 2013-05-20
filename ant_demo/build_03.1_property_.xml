@@ -32,9 +32,10 @@
 	
 	<!-- 第五种方式：会在执行target之前去联网获取
 		当在target内声明时，则只会在运行到声明时，才会去获取
-		从网络链接处直接获取 如果该网络不通，导致一直卡死或直接抛异常-->
+		从网络链接处直接获取 如果该网络不通，导致一直卡死或直接抛链接异常-->
+	<!--
 	<property url="http://www.sodino.com/res_03.1property.url.properties"/>
-	
+	-->	
 	
 	
     <target name="Set">
