@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="SetProperties" default="Immutable" basedir=".">
+	<property name="color" value="blue"/>
+	<property name="color" value="red"/>
+	
+    <target name="Immutable">
+		<!--属性的不可变性，此处将打印出"color"的第一次赋值"blue"-->
+		<echo message="${color}"></echo>
+    </target>
+</project>
