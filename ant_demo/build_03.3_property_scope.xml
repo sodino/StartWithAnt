@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="SetProperties" default="Scope" basedir=".">
+	<property name="color" value="blue"/>
+	
+    <target name="ScopeFirst">
+    	<property name="inner.color" value="red"/>
+		<!--属性的不可变性，此处将打印出"color"的第一次赋值"blue"-->
+		<echo message="${color}"></echo>
+    </target>
+
+    <target name="ScopeSecond">
+    	<echo message="${inner.color}"></echo>
+    </target>
+</project>
