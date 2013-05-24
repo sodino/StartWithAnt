@@ -1,6 +1,6 @@
 <?xml version="1.0" encoding="UTF-8"?>
 
-<project name="SetProperties" default="Scope" basedir=".">
+<project name="ScopeProject" default="ScopeSecond" basedir=".">
 	<property name="color" value="blue"/>
 	
     <target name="ScopeFirst">
