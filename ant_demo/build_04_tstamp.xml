@@ -1,0 +1,35 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project name="tstamp_demo" basedir="." default="display">
+    <target name="display" description="TSTAMP demo">
+        <tstamp/>
+        <echo>DSTAMP: ${DSTAMP}</echo>
+        <echo>TSTAMP: ${TSTAMP}</echo>
+        <echo>TODAY: ${TODAY}</echo>
+        
+        
+        <tstamp>
+            <format property="TODAY_UK" pattern="d-MMMM-yyyy hh:mm:ss" locale="en,UK"/>
+        </tstamp>
+        <echo>TODAY_UK: ${TODAY_UK}</echo>
+        
+        <!-- 设置引用前缀，可区分 -->
+        <tstamp prefix="start"/>
+        <echo>start.DSTAMP: ${start.DSTAMP}</echo>
+        <echo>start.TSTAMP: ${start.TSTAMP}</echo>
+        <echo>start.TODAY: ${start.TODAY}</echo>
+        
+        <!-- 设置不同的pattern,可参考：http://docs.oracle.com/javase/6/docs/api/java/text/SimpleDateFormat.html＃Examples -->
+        <tstamp>
+            <format property="current.date.time1" pattern="MM_dd_yyyy_HH_mm"/>
+            <format property="current.date.time2" pattern="MM-dd-yyyy HH:mm:ss "/>
+            <format property="current.date.time3" pattern="MM/dd/yyyy hh:mm:ss a, z"/>
+            <!-- 设置延时，负值为过去时间，正值为未来时间，unit设置时间单位 -->
+            <format property="current.date.time4" pattern="MM/dd/yyyy hh:mm:ss aa" offset="-10" unit="minute"/>
+        </tstamp>
+        <echo>current.date.time1: ${current.date.time1}</echo>
+        <echo>current.date.time2: ${current.date.time2}</echo>
+        <echo>current.date.time3: ${current.date.time3}</echo>
+        <echo>current.date.time4(offset:-10min): ${current.date.time4}</echo>
+    </target>
+</project>
+
