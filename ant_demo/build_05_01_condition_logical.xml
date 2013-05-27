@@ -29,19 +29,19 @@
         </and>
     </condition>
     
-    <condition property="complete04" value="Done!" else="Doing...">
-        <or>
-            <istrue value="${success}"/>
-            <istrue value="${fail}"/>
-        </or>
-    </condition>
-    
-    <condition property="complete05" value="Done!" else="Doing...">
-        <xor>
-            <istrue value="${success}"/>
-            <isfalse value="${fail}"/>
-        </xor>
-    </condition>
+	<condition property="complete04" value="Yes!" else="No">
+		<or>
+			<istrue value="${success}"/>
+			<istrue value="${fail}"/>
+		</or>
+	</condition>
+
+	<condition property="complete05" value="Yes" else="No">
+		<xor>
+			<istrue value="${success}"/>
+			<isfalse value="${fail}"/>
+		</xor>
+	</condition>
     
     <target name="Condition">
         <echo message="01:The task status is : ${complete01}" />
@@ -51,4 +51,3 @@
         <echo message="05:This two params are different from each one : ${complete05}"/>
     </target>
 </project>
-

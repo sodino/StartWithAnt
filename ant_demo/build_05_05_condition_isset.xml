@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- condition 指定的属性是否存在 -->
+
+<project name="Condition" default="Condition" basedir=".">
+	<property name="file.a" value="res_03.1property.01.properties"/>
+    
+    <condition property="isSet" value="true" else="false">
+		<isset property="file.a"/>
+	</condition>
+	<target name="Condition">
+		<echo message="file.a is set: ${isSet}"/>
+	</target>
+</project>
