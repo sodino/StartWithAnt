@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- condition os系统判断 -->
+
+<project name="Condition" default="Condition" basedir=".">
+    <condition property="isWindows">
+        <os family="windows" />
+    </condition>
+    <condition property="isMac">
+        <os family="mac" />
+    </condition>
+    <condition property="isDos">
+        <os family="dos" />
+    </condition>
+    <condition property="isNetware">
+        <os family="netware" />
+    </condition>
+    <condition property="isOs-2">
+       <os family="os/2" />
+    </condition>
+    <condition property="isWin9x">
+       <os family="win9x" />
+    </condition>
+	<target name="Condition">
+		<echo>
+			Property isWindows : ${isWindows}
+			Property isMac : ${isMac}
+			Property isDos : ${isDos}
+			Property isNetware  :${isNetware}
+			Property isOs-2 : ${isOs-2}
+			Property isWin9x : ${isWin9x}
+		</echo>
+	</target>
+</project>

@@ -1,0 +1,32 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- condition available实用的条件判断 -->
+
+<project name="Condition" default="Condition" basedir=".">
+    <!-- 先设定boolean值 -->
+    <property name="success" value="false" />
+    <property name="fail" value="true"/>
+    
+    <!-- available的使用 -->
+    <!-- 判断文件、文件夹是否存在 -->
+    <property name="file.path" value="/Users/chensodino/Mission/rar"/>
+    <condition property="rar.file.exist" value="Exist!" else="Can't be found!">
+        <!-- available:得嵌在condition内才能正常解析生效
+             file:需要判断的类型文件路径
+             type:指定查找"file"或"dir"
+         -->
+        <available property="rar.file" type="dir" file="${file.path}"/>
+    </condition>
+    
+    <!-- 判断在ant的类环境中是否存在ZipFile类 -->
+    <property name="ZipFile.path" value="org.apache.tools.zip.ZipFile"/>
+    <condition property="ZipFile.exist" value="Exist!" else="Can't be found!">
+        <available property="ZipFile.path.exist" classname="${ZipFile.path}"/>
+    </condition>
+    
+    
+    
+    <target name="Condition">
+        <echo message="01: ${file.path} ${rar.file.exist}" />
+        <echo message="02: ${ZipFile.path} ${ZipFile.exist}" />
+    </target>
+</project>
