@@ -18,15 +18,39 @@
     </condition>
     
     <!-- 判断在ant的类环境中是否存在ZipFile类 -->
-    <property name="ZipFile.path" value="org.apache.tools.zip.ZipFile"/>
+    <property name="ZipFile.classpath" value="org.apache.tools.zip.ZipFile"/>
     <condition property="ZipFile.exist" value="Exist!" else="Can't be found!">
-        <available property="ZipFile.path.exist" classname="${ZipFile.path}"/>
+        <available property="ZipFile.classpath.exist" classname="${ZipFile.classpath}"/>
+    </condition>
+    <!--以下代码亦可，注意的事引用path时，不需要使用${}圈起来。
+	<property name="properties.jar" value="properties.jar"/>
+	<path id="property.path" location="${properties.jar}"/>
+	<property name="class.full.name" value="android.support.v4.accessibilityservice.AccessibilityServiceInfoCompat"/>
+	<condition property="class.exist" value="Exist!" else="Can't be found!">
+        <available property="class.classpath.exist" classname="${class.full.name}" classpathref="property.path"/>
+    </condition>
+    -->
+	<property name="properties.jar" value="properties.jar"/>
+	<property name="class.full.name" value="lab.sodino.pc.Goods"/>
+	<condition property="class.exist" value="Exist!" else="Can't be found!">
+        <available property="class.classpath.exist" classname="${class.full.name}" classpath="${properties.jar}"/>
     </condition>
     
-    
+	<!--允许在指定的多个外部jar中查询资源.-->
+	<property name="res.full.name" value="lab/sodino/res_03.1property.02.properties"/>
+	<condition property="res.exist" value="Exist!" else="Can't be found!">
+        <available property="res.classpath.exist" resource="${res.full.name}">
+			<classpath>
+				<pathelement location="${properties.jar}"/>
+				<!-- other jar pathelement -->
+			</classpath>
+		</available>
+    </condition>
     
     <target name="Condition">
         <echo message="01: ${file.path} ${rar.file.exist}" />
-        <echo message="02: ${ZipFile.path} ${ZipFile.exist}" />
+        <echo message="02: ${ZipFile.classpath} ${ZipFile.exist}" />
+        <echo message="03: ${properties.jar} contains ${class.full.name}:${class.exist}" />
+        <echo message="04: ${properties.jar} contains ${res.full.name}:${res.exist}" />
     </target>
 </project>
