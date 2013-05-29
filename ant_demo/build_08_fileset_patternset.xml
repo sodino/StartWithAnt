@@ -1,0 +1,60 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- fileset定义了一组文件,其表示的文件必须存在。
+	patternset的复用可以便于维护。
+	"if"与"unless"
+	"if":The item was enabled if a property with that name was defined - even to be the empty string or false - and disabled if the property was not defined
+	"unless":an unless attribute disables the item if it is either the name of property which is defined, or if it evaluates to a true-like value.
+ -->
+
+<project name="fileset" basedir="." default="copy">
+	<property name="src.dir" location="./build_08_fileset_patternset"/>
+	<property name="work.dir" location="../../../AntSpace/build_08_fileset_patternset"/>
+	<property name="no.xml" value="no"/>
+	<target name="copy">
+		<!-- 在target内声明的patternset可以在其它target使用，只要在使用之前有调用过copy.target -->
+		<patternset id="exclude.xml01">
+			<exclude name="**/*.xml"></exclude>
+		</patternset>
+		<!-- 只要有定义no.xml(不管其值如何)的情况下，exclude成立 -->
+		<patternset id="exclude.xml02">
+			<exclude name="**/*.xml" if="no.xml"></exclude>
+		</patternset>
+		
+		<!-- no.exist未曾声明过，exclude不成立 -->
+		<patternset id="exclude.xml03">
+			<exclude name="**/*.xml" if="no.exist"></exclude>
+		</patternset>
+		
+		<!-- 使用了unless，已经定义no.xml的情况下，exclude不成立 -->
+		<patternset id="exclude.xml04">
+			<exclude name="**/*.xml" unless="no.xml"></exclude>
+		</patternset>
+		
+		<!-- 使用了unless，no.exist未曾声明过，exclude成立 -->
+		<patternset id="exclude.xml04">
+			<exclude name="**/*.xml" unless="no.exist"></exclude>
+		</patternset>
+		
+		<!-- 使用了unless，直接赋值为false/no，exclude成立 -->
+		<patternset id="exclude.xml05">
+			<exclude name="**/*.xml" unless="no"></exclude>
+		</patternset>
+		
+		<!-- 使用了unless，直接赋值为true/yes，exclude不成立 -->
+		<patternset id="exclude.xml06">
+			<exclude name="**/*.xml" unless="true"></exclude>
+		</patternset>
+		
+		<!-- 删除指定目录下的所有文件及文件夹及该目录本身 -->
+		<delete dir="${work.dir}"/>
+
+		<!-- 如果work.dir不存在，会自动创建 -->
+		<copy todir="${work.dir}">
+			<fileset dir="${src.dir}">
+				<patternset refid="exclude.xml04"/>
+			</fileset>
+		</copy>
+	</target>
+	
+	
+</project>

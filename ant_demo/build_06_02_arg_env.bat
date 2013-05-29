@@ -1,0 +1,1 @@
+echo ${env.jad_home}

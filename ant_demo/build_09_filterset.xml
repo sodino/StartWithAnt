@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- filterset:允许定义一组过滤器(记号过滤:token filtering)，
+	在文件移动或复制时完成文件中的文本替换。
+	若在输入文件中发现了某些记号，
+	当文件移动或复制时这些记号会被替换为匹配过滤器中所定义的文本。
+	
+	filterset可作为copy和move任务中嵌套的内容出现。
+ -->
+
+<project name="filterset" basedir="." default="copy">
+	<property name="src.dir" location="./build_09_filterset"/>
+	<property name="des.dir" location="../../../AntSpace/build_09_filterset"/>
+
+	<!-- 先声明时间戳，为后面的${TODAY}生效 -->
+	<tstamp/>
+	<!-- 未声明过滤的起始、终止符，则默认为"@"，效果为"@date@"替换为日期时间。 -->
+	<filterset id="filter_date">
+		<filter token="date" value="${TODAY}"/>
+	</filterset>
+	
+	<!-- 自定义起始、终止标记。效果为"%author!"替换为"sodino" -->
+	<filterset id="filter_custom_token" begintoken="%" endtoken="!">
+		<filter token="author" value="sodino"/>
+	</filterset>
+	
+	<target name="copy">
+		<copy todir="${des.dir}">
+			<fileset dir="${src.dir}" includes="**/*.java" casesensitive="false"/>
+			<filterset refid="filter_date"/>
+			<filterset refid="filter_custom_token"/>
+		</copy>
+	</target>
+	
+</project>

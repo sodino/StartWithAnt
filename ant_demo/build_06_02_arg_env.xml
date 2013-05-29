@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+
+<project name="DataType" default="Env" basedir=".">
+	<property name="file.a" value="res_03.1property.01.properties"/>
+    
+    <condition property="isSet" value="true" else="false">
+		<isset property="file.a"/>
+	</condition>
+	<target name="Env">
+		<exec executable="build_06_02_arg_env.bat">
+			<!--
+			<env key="java_home" value="C:\Program Files\Java\jdk1.7.0_07\bin"/>
+			-->
+			<env key="jad_home" value="D:\MissionSetup\JD"/>
+		</exec>
+	</target>
+</project>
