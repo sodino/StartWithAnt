@@ -2,13 +2,10 @@
 <!-- Ant传参进bat/shell文件 -->
 <project name="DataType" default="Env" basedir=".">
 	<target name="Env">
-		<!--直接将系统环境变量导入到Ant运行时中-->
-		<property environment="env"/>
 		<path id="output_dir" location="lab\sodino"/>
-		<exec executable="build_06_02_arg_env.bat">
+		<exec executable="build_06.2_arg_env.bat">
 			<!-- 传参到bat / shell中去 -->
-			<!-- 读取系统环境变量中jad_home的值 -->
-			<env key="jad_home" value="${env.jad_home}"/>
+			<env key="jad_home" value="D:\MissionSetup\JD"/>
 			<env key="class_file" file="lab\sodino\AntTest.class"/>
 			<env key="output_dir" path="output_dir"/>
 		</exec>

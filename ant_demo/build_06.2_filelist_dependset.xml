@@ -3,16 +3,14 @@
      dependset任务将一个或多个输入文件与一个或多个输出文件加以比较。
      如果某些输入文件更新一些或缺少某些输入文件，则所有输出文件都被删除。
  
-     下面例子中，由于filelist id:xml.file02中在其目录下缺少build_04.xml所以targetfilelist的文件build_03.xml将被删除
+     下面例子中，由于filelist id:xml.file02中在其目录下缺少build_04.xml所以targetfilelist的文件build_03.xml将被删除.
  
      对于例子中的dir赋值直接使用value,使用path也可。两者在此例子上无区别。
         value,属性文本将不做任何改动地传递给正在执行的进程。
         path,在传递给进程之前将会被转换为一个平台专有的路径，经常用于需要绝对路径的应用场景。
  -->
-<project name="filelist" basedir="." default="filelist_dependset02">
-    <property name="folder_path" value="./build_07_filelist_dependset"/>
-	
-	<path id="xml_folder" location="./build_07_filelist_dependset"/>
+<project name="filelist" basedir="." default="filelist_dependset">
+	<path id="xml_folder" location="./build_06.2_filelist_dependset"/>
 	<!-- dir处直接赋值为path.id名称，也可以${path.id} -->
 	<filelist id="xml.file01" dir="xml_folder" files="build_01.xml,build_02.xml"></filelist>
 	<filelist id="xml.file01.01copy" refid="filelist"/>
@@ -26,21 +24,21 @@
 		<file name="build_01.xml"/>
 		<file name="build_02.xml"/>
 	</filelist>
-	<!-- 由property定义的路径则需${}起来 -->
+
 	<filelist id="xml.file02"
-		dir="${folder_path}"
+		dir="xml_folder"
 		files="build_02.xml,build_04.xml">
 	</filelist>
 	
 	
-	<target name="filelist_dependset02">
+	<target name="filelist_dependset">
 		<!--仅输出“filelist”，非所有的文件路径-->
 		<echo>${toString:xml.file01}</echo>
         <dependset>
 			<!--在比较输入文件时，并不限制srcfilelist的个数，1个或多个皆可-->
             <srcfilelist refid="xml.file01"/>
             <srcfilelist refid="xml.file02"/>
-            <targetfilelist dir="${folder_path}" files="build_03.xml"/>
+            <targetfilelist dir="xml_folder" files="build_03.xml"/>
         </dependset>
 	</target>
 	
