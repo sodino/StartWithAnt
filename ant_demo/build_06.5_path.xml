@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8"?>
 <!-- path元素的使用 -->
 <project name="DailyBuild" default="path_demo" basedir=".">
-	<path id="dir.path" location="."></path>
+	<path id="dir.path" path="."></path>
 	<path id="xml.path" location="./build_001_property.xml"></path>
 	<path id="all.xml.path">
 		<fileset dir=".">
