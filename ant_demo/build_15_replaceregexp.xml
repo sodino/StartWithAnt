@@ -1,0 +1,38 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- replaceregexp:直接正则表达式的替换 -->
+
+<project name="math.project" basedir="." default="replace.regexp">
+	<property name="original.java" value="./build_15_replaceregexp/AppSetting.original.java"/>
+	<property name="AppSetting.java" value="./build_15_replaceregexp/AppSetting.java"/>
+	
+	<property name="app.id" value="987654321"/>
+	<property name="app.channel" value="Google Play"/>
+	
+	<target name="replace.regexp"> 
+		<delete file="${AppSetting.java}"/>
+		<copy file="${original.java}" tofile="${AppSetting.java}"/>
+		<!-- (.*):左右括号包围着正式表达式内容用于表示一个正式表达式组，"."任意内容，"*"任意次数
+			"\1"表示引用正式表达式中第一个匹配的结果,本例子为保持原内容不变
+		-->
+		<replaceregexp file="${AppSetting.java}"
+			match="OldProperty=(.*)"
+			replace="NewProperty=\1"
+			byline="true"
+		/>
+		
+		<!-- "\s"所有不可见的空格字符
+			"+"至少出现1次
+		-->
+		<replaceregexp file="${AppSetting.java}"
+			match="APP_ID(\s*)=(\s*)[0-9]+;"
+			replace="APP_ID = ${app.id};"
+			byline="true"
+		/>
+		
+		<replaceregexp file="${AppSetting.java}"
+			match="APP_CHANNEL(\s*)=(\s*)&quot;([a-z]|\s)+&quot;"
+			replace="APP_CHANNEL = &quot;${app.channel}&quot;"
+			byline="true"
+		/>
+	</target>
+</project>

@@ -1,0 +1,34 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- replace是记号过滤方式。不支持正则表达式。 -->
+<project name="replace.project" basedir="." default="replace">
+	<property name="work.dir" value="./build_14_replace"/>
+	<property name="src.demo" value="${work.dir}/replace.demo.original.txt"/>
+	<property name="demo.txt" value="${work.dir}/replace.demo.txt"/>
+	<property name="property.list.file" value="${work.dir}/property.list.txt"/>
+	<target name="replace">
+		<delete file="${demo.txt}"/>
+		<copy file="${src.demo}" tofile="${demo.txt}"/>
+		<!--file属性指定替换的范围为某一文件.亦可通过dir/include/exclude等设置目标范围为某一路径下的某个范围内的文件
+		    将所有的"@token1@"字样替换成"defaultvalue"
+			将所有的"@token2@"字样替换成"Expect Labs"
+			将所有的"@token3@"字样替换成property.lsit.file中的key"property.key.google"所对应的值。
+		-->
+		<replace 
+			file="${demo.txt}"
+			value="---defaultvalue---"
+			propertyFile="${property.list.file}">
+		  <replacefilter 
+			token="@token1@"/>
+		  <replacefilter 
+			token="@token2@" 
+			value="---Expect Labs---"/>
+		  <replacefilter 
+			token="@token3@" 
+			property="property.key.google"/>
+		  <replacefilter>
+			<replacetoken>@token4@</replacetoken> 
+			<replacevalue>---语音语义分析技术---</replacevalue>
+		  </replacefilter>
+		</replace>
+	</target>
+</project>

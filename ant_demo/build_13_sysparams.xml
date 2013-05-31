@@ -1,0 +1,55 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 逻辑判断：logical
+	使用ant-contrib.jar扩展包,详见http://ant-contrib.sourceforge.net/tasks/index.html
+		
+	将下载的ant-contrib.jar置于${ant_home}/lib下，并于开头引用taskdef声明即可。
+	经测仅支持简单的加、减、乘、除、求余。
+-->
+
+<project name="math.project" basedir="." default="get_hostname">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+	<target name="get_hostname"> 
+		<echo message="${osFamily}"/>
+		<if> 
+			<equals arg1="${osFamily}" arg2="windows" /> 
+			<then> 
+				<!-- 在 Windows 上取得 hostname.domain 的值 --> 
+				<exec executable="hostname" outputproperty="host.name" />    
+
+				<exec executable="cmd" output="${basedir}/ipconfig.txt"> 
+					<arg value="/c"/> 
+					<arg value="ipconfig /all|find &quot;DNS Suffix Search List&quot; "/> 
+				</exec> 
+				
+				<replaceregexp file="${basedir}/ipconfig.txt"
+							match="DNS Suffix Search List(.*): "
+							replace="dns=" flags="g"/> 
+							
+				<property file="${basedir}/ipconfig.txt" /> 
+				
+				<property name="hostname.domain" value="${host.name}.${dns}" />    
+				<echo message="host.name=${host.name}"/>
+				<echo message="dns=${dns}"/>
+			</then> 
+
+			<else> 
+				<echo message="test"/>
+				<if> 
+					<equals arg1="${osName}" arg2="linux" /> 
+					<then> 
+						<!-- 在 Linux 上取得 hostname.domain 的值 --> 
+						<exec executable="hostname" outputproperty="hostname.domain" > 
+							<arg value="-f"/> 
+						</exec> 
+					</then> 
+					<else> 
+						<!-- 在 Unix 上取得 hostname.domain 的值 --> 
+						<exec executable="hostname" outputproperty="hostname.domain" /> 
+					</else> 
+				</if> 
+			</else> 
+		</if> 
+
+		<echo>The Hostname is: ${hostname.domain}</echo> 
+	</target>
+</project>

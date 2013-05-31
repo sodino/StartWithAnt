@@ -1,0 +1,99 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 逻辑判断：logical
+	使用ant-contrib.jar扩展包,详见http://ant-contrib.sourceforge.net/tasks/index.html
+		
+	将下载的ant-contrib.jar置于${ant_home}/lib下，并于开头引用taskdef声明即可。
+	经测仅支持简单的加、减、乘、除、求余。
+-->
+
+<project name="math.project" basedir="." default="math">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+	<target name="math">
+
+    <var name="op1" value="12"/>
+    <var name="op2" value="6"/>
+    <var name="op" value="+"/>
+
+    <!-- demo plus -->
+    <math result="result" operand1="${op1}" operation="${op}" operand2="${op2}" datatype="int"/>
+    <echo>${op1} ${op} ${op2} = ${result}</echo>
+    <assert name="result" value="18"/>
+
+    <!-- demo reusing result -->
+    <math result="result" operand1="${result}" operation="${op}" operand2="${op2}" datatype="int"/>
+    <echo>${op1} ${op} ${op2} = ${result}</echo>
+    <assert name="result" value="24"/>
+
+    <!-- demo minus -->
+    <var name="op" value="-"/>
+    <math result="result" operand1="${op1}" operation="${op}" operand2="${op2}" datatype="int"/>
+    <echo>${op1} ${op} ${op2} = ${result}</echo>
+    <assert name="result" value="6"/>
+
+    <!-- demo multiply -->
+    <var name="op" value="*"/>
+    <math result="result" operand1="${op1}" operation="${op}" operand2="${op2}" datatype="int"/>
+    <echo>${op1} ${op} ${op2} = ${result}</echo>
+    <assert name="result" value="72"/>
+
+    <!-- demo divide -->
+    <var name="op" value="/"/>
+    <math result="result" operand1="${op1}" operation="${op}" operand2="${op2}" datatype="int"/>
+    <echo>${op1} ${op} ${op2} = ${result}</echo>
+    <assert name="result" value="2"/>
+
+    <!-- demo modulo -->
+    <var name="op" value="%"/>
+    <math result="result" operand1="${op1}" operation="${op}" operand2="${op2}" datatype="int"/>
+    <echo>${op1} ${op} ${op2} = ${result}</echo>
+    <assert name="result" value="0"/>
+
+    <!-- demo calculating the area of a circle -->
+    <!-- first, calculate the radius -->
+    <math result="radius">  <!-- defaults to double datatype -->
+        <op type="*">
+            <num value="1"/>
+            <num value="2"/>
+            <num value="3"/>
+            <num value="4"/>
+            <num value="5"/>
+        </op>
+    </math>
+    <echo> 1 * 2 * 3 * 4 * 5 = ${radius}</echo>
+
+    <!-- now calculate the area -->
+    <math result="area" precision="float">
+        <op type="*">
+            <num value="PI"/>
+            <op type="pow">
+                <num value="${radius}"/>
+                <num value="2"/>
+            </op>
+        </op>
+    </math>
+    <echo>area = PI * radius ^ 2 = ${area}</echo>
+
+    <!-- demo calculating a random number between 0 and 100 -->
+    <math result="result">
+        <op op="rint">
+            <op op="*">
+                <num value="100"/>
+                <op op="random"/>
+            </op>
+        </op>
+    </math>
+    <echo>a random number between 0 and 100: ${result}</echo>
+
+    <!-- demo another multiplication -->
+    <math result="result" operation="multiply" operand1="17" operand2="13"/>
+    <echo>${result}</echo>
+
+    <!-- demo shorthand notation for calculating sin of an angle, which is degrees -->
+    <math result="sin">
+      <sin>
+        <radians arg1="${angle_in_degrees}" />
+      </sin>
+    </math>
+    <echo>${sin}</echo>
+	</target>
+</project>

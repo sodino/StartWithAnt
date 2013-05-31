@@ -1,0 +1,43 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 逻辑判断：logical
+	使用ant-contrib.jar扩展包,详见http://ant-contrib.sourceforge.net/tasks/index.html
+		
+	将下载的ant-contrib.jar置于${ant_home}/lib下，并于开头引用taskdef声明即可。
+	ant 1.5以后，不支持for循环。
+-->
+
+<project name="logical.project" basedir="." default="logical">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+
+	<property name="what.is.your.name" value="sodinochen"/>
+
+	<target name="logical">
+		<if>
+			<equals arg1="${what.is.your.name}" arg2="chen"/>
+			<then>
+				<echo message="My name is chen."></echo>
+			</then>
+			<elseif>
+				<equals arg1="${what.is.your.name}" arg2="sodino"/>
+				<then>
+					<echo message="My name is sodino."></echo>
+				</then>
+			</elseif>
+			<else>
+				<echo message="I don't know your name."/>
+			</else>
+		</if>
+		
+		<switch value="${what.is.your.name}">
+		  <case value="sodino">
+			<echo message="The value of property is sodino" />
+		  </case>
+		  <case value="chen">
+			<echo message="The value of property is chen" />
+		  </case>
+		  <default>
+			<echo message="The value of property is ${what.is.your.name}" />
+		  </default>
+		</switch>
+	</target>
+</project>

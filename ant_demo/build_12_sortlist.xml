@@ -1,0 +1,17 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 逻辑判断：logical
+	使用ant-contrib.jar扩展包,详见http://ant-contrib.sourceforge.net/tasks/index.html
+		
+	将下载的ant-contrib.jar置于${ant_home}/lib下，并于开头引用taskdef声明即可。
+	经测仅支持简单的加、减、乘、除、求余。
+-->
+
+<project name="math.project" basedir="." default="math">
+	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
+	<target name="math">
+		<property name="my.list" value="z,y,v,au,cx,w,t" />
+		<sortlist property="my.sorted.list" value="${my.list}"
+					 delimiter="," />
+		<echo message="${my.sorted.list}" />
+	</target>
+</project>
