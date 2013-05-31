@@ -8,8 +8,8 @@
  -->
 
 <project name="filterset" basedir="." default="copy">
-	<property name="src.dir" location="./build_09_filterset"/>
-	<property name="des.dir" location="../../../AntSpace/build_09_filterset"/>
+	<property name="src.dir" location="./build_06.4_filterset/src"/>
+	<property name="des.dir" location="./build_06.4_filterset/des"/>
 
 	<!-- 先声明时间戳，为后面的${TODAY}生效 -->
 	<tstamp/>
