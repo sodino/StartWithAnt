@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- path元素的使用 -->
+<project name="DailyBuild" default="path_demo" basedir=".">
+	<path id="dir.path" location="."></path>
+	<path id="xml.path" location="./build_001_property.xml"></path>
+	<path id="all.xml.path">
+		<fileset dir=".">
+			<include name="**/*.xml"/>
+		</fileset>
+	</path>
+	<path id="project.path">
+		<pathelement path="dir.path"/>
+		<path refid="xml.path"/>
+	</path>
+	<!-- 使用${toString:path_id}输出xml.path的完整路径 -->
+	<target name="path_demo">
+		<echo message="xml.path:  ${toString:xml.path}"></echo>
+		<echo message="all.xml.path:  ${toString:all.xml.path}"></echo>
+		<echo message="project.path:  ${toString:project.path}"></echo>
+	</target>
+</project>
