@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- Ant传参进bat/shell文件 -->
+<project name="DataType" default="Mapper" basedir=".">
+	<target name="Mapper">
+		<property name="src_dir" location="${basedir}\build_06.6_mapper\src"/>
+		<property name="output_identity" location="${basedir}\build_06.6_mapper\identity"/>
+		<echo message="Copy:identity mapper"/>
+		<!-- 复制所有的*.java文件并保存路径信息。 -->
+		<copy todir="${output_identity}">
+			<fileset dir="${src_dir}" includes="**/*.java"/>
+			<mapper type="identity"/>
+		</copy>
+		
+		
+		<property name="output_flatten" location="${basedir}\build_06.6_mapper\flatten"/>
+		<echo message="Copy:flatten mapper"/>
+		<!-- 复制所有的*.java文件，但不保存路径信息。 -->
+		<copy todir="${output_flatten}">
+			<fileset dir="${src_dir}" includes="**/*.java"/>
+			<mapper type="flatten"/>
+		</copy>
+
+		
+		<property name="output_glob" location="${basedir}\build_06.6_mapper\glob"/>
+		<echo message="Copy:glob mapper"/>
+		<!-- 复制所有的*.java文件并保存路径信息并对from文件改名。 -->
+		<!-- 由于from限制了是*Test.java,所以*.txt无效，不以"Test.java"结尾的文件名也无效 -->
+		<copy todir="${output_glob}">
+			<fileset dir="${src_dir}" includes="**/*.java,**/*.txt"/>
+			<mapper type="glob" from="*Test.java" to="*JavaTest.java"/>
+		</copy>
+		
+		<!--如果指定所有.java文件中存在某个文件比javac_class.jar要新，则特性"need.to.do.javac"值为true. -->
+		<uptodate property="need.to.do.javac"> 
+			<srcfiles dir="${src_dir}" includes="**/*.java"/> 
+			<mapper type="merge" to="${src_dir}\..\javac_class.jar"/>
+		</uptodate> 
+		<condition property="do.javac" value="true" else="false">
+			<isset property="need.to.do.javac"/>
+		</condition>
+		<echo message="need to do javac:${do.javac}"/>
+
+		
+		<property name="output_package" location="${basedir}\build_06.6_mapper\package"/>
+		<echo message="Copy:package mapper"/>
+		<!-- 复制所有的*.java文件并将包路径信息作为前缀添加到文件名上,并按to的规则重命名文件。 -->
+		<!-- lab/sodino/Test.java → lab.sodino.Test.Subfix.java -->
+		<copy todir="${output_package}">
+			<fileset dir="${src_dir}" includes="**/*.java,**/*.txt"/>
+			<mapper type="package" from="*.java" to="*.java"/>
+		</copy>
+				
+		
+		<property name="output_unpackage" location="${basedir}\build_06.6_mapper\unpackage"/>
+		<echo message="Copy:unpackage mapper"/>
+		<!-- 复制所有的*.java文件并将包路径信息作为前缀添加到文件名上,并按to的规则重命名文件。 -->
+		<!-- lab/sodino/Test.java → lab.sodino.Test.Subfix.java -->
+		<copy todir="${output_unpackage}">
+			<fileset dir="${output_package}" includes="**/*.java,**/*.txt"/>
+			<mapper type="unpackage" from="*.java" to="*.java"/>
+		</copy>
+				
+		
+	</target>
+</project>
