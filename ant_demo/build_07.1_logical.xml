@@ -9,18 +9,24 @@
 <project name="logical.project" basedir="." default="logical">
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 
-	<property name="what.is.your.name" value="sodinochen"/>
+	<property name="what.is.your.name" value="mobile.qq"/>
 
 	<target name="logical">
 		<if>
-			<equals arg1="${what.is.your.name}" arg2="chen"/>
+			<equals arg1="${what.is.your.name}" arg2="mobile"/>
 			<then>
-				<echo message="My name is chen."></echo>
+				<echo message="My name is mobile."></echo>
 			</then>
 			<elseif>
-				<equals arg1="${what.is.your.name}" arg2="sodino"/>
+				<equals arg1="${what.is.your.name}" arg2="qq"/>
 				<then>
-					<echo message="My name is sodino."></echo>
+					<echo message="My name is qq."></echo>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${what.is.your.name}" arg2="mobile.qq"/>
+				<then>
+					<echo message="My name is mobile.qq"></echo>
 				</then>
 			</elseif>
 			<else>
@@ -29,10 +35,10 @@
 		</if>
 		
 		<switch value="${what.is.your.name}">
-		  <case value="sodino">
+		  <case value="mobile">
 			<echo message="The value of property is sodino" />
 		  </case>
-		  <case value="chen">
+		  <case value="qq">
 			<echo message="The value of property is chen" />
 		  </case>
 		  <default>
