@@ -21,7 +21,7 @@
 
     <!-- demo reusing result -->
     <math result="result" operand1="${result}" operation="${op}" operand2="${op2}" datatype="int"/>
-    <echo>${op1} ${op} ${op2} = ${result}</echo>
+    <echo>18 ${op} ${op2} = ${result}</echo>
     <assert name="result" value="24"/>
 
     <!-- demo minus -->
