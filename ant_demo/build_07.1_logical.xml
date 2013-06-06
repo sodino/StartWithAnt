@@ -6,7 +6,7 @@
 	ant 1.5以后，不支持for循环。
 -->
 
-<project name="logical.project" basedir="." default="logical">
+<project name="logical.project" basedir="." default="logical" >
 	<taskdef resource="net/sf/antcontrib/antcontrib.properties"/>
 
 	<property name="what.is.your.name" value="mobile.qq"/>
@@ -45,5 +45,25 @@
 			<echo message="The value of property is ${what.is.your.name}" />
 		  </default>
 		</switch>
+		
+		<ac:for list="a,b,c,d,e" param="letter"  xmlns:ac="antlib:net.sf.antcontrib">  
+		  <sequential>  
+			<echo>Letter @{letter}</echo>  
+		  </sequential>  
+		</ac:for>
+		
+		<!--  -->
+		<ac:for param="xmlfile" xmlns:ac="antlib:net.sf.antcontrib">
+		  <ac:outofdate>
+			<ac:sourcefiles>
+			  <ac:fileset dir="${basedir}" includes="**/*.xml"/>
+			</ac:sourcefiles>
+			<ac:mapper dir="${basedir}/xdocs"
+					   type="glob" from="*.xml" to="${basedir}/docs/*.html"/>
+		  </ac:outofdate>
+		  <ac:sequential>
+			<echo>Need to generate a target html file from source file @{xmlfile}</echo>
+		  </ac:sequential>
+		</ac:for>
 	</target>
 </project>
