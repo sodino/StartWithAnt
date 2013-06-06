@@ -36,10 +36,10 @@
 		
 		<switch value="${what.is.your.name}">
 		  <case value="mobile">
-			<echo message="The value of property is sodino" />
+			<echo message="The value of property is mobile" />
 		  </case>
 		  <case value="qq">
-			<echo message="The value of property is chen" />
+			<echo message="The value of property is qq" />
 		  </case>
 		  <default>
 			<echo message="The value of property is ${what.is.your.name}" />
