@@ -1,0 +1,45 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 逻辑判断：logical
+	使用ant-contrib.jar扩展包,详见http://ant-contrib.sourceforge.net/tasks/index.html
+-->
+
+<project name="var.project" basedir="." default="var">
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="Users/sodino/Mission/apache-ant-1.9.1/lib/ant-contrib.jar"/>
+        </classpath>
+    </taskdef>
+	<target name="var">
+        <property name="x" value="6"/>
+        <echo>${x}</echo>   <!-- will print 6 -->
+        <var name="x" unset="true"/>
+        <property name="x" value="12"/>
+        <echo>${x}</echo>   <!-- will print 12 -->
+        <var name="x" value="6 + ${x}"/>
+        <echo>x = ${x}</echo>   <!-- print: 6 + 12 -->
+
+        <var name="str" value="I "/>
+        <var name="str" value="${str} am "/>
+        <var name="str" value="${str} a "/>
+        <var name="str" value="${str} string."/>
+        <echo>${str}</echo>     <!-- print: I am a string. -->
+
+        <var name="x" value="6"/>
+        <echo>x = ${x}</echo>   <!-- print: 6 -->
+
+        <property name="x" value="12"/>
+        <echo>x = ${x}</echo>   <!-- print: 6 (property can't override) -->
+
+        <var name="x" value="blue"/>
+        <tstamp>
+            <format property="x" pattern="EEEE"/>
+        </tstamp>
+        <echo>Today is ${x}.</echo> <!-- print: Today is blue. -->
+
+        <var name="x" value="" unset="true"/>
+        <tstamp>
+            <format property="x" pattern="EEEE"/>
+        </tstamp>
+        <echo>Today is ${x}.</echo> <!-- print: Today is Friday. -->
+	</target>
+</project>
