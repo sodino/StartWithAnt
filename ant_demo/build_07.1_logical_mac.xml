@@ -1,0 +1,70 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!-- 逻辑判断：logical
+	使用ant-contrib.jar扩展包,详见http://ant-contrib.sourceforge.net/tasks/index.html
+		
+	将下载的ant-contrib.jar置于${ant_home}/lib下，并于开头引用taskdef声明即可。
+	ant 1.5以后，不支持for循环。
+-->
+
+<project name="logical.project" basedir="." default="logical" >
+	<taskdef resource="net/sf/antcontrib/antlib.xml">
+        <classpath>
+            <pathelement location="/Users/sodino/Mission/apache-ant-1.9.1/lib/ant-contrib.jar"/>
+        </classpath>
+
+    </taskdef>
+
+	<property name="what.is.your.name" value="mobile.qq"/>
+
+	<target name="logical">
+		<if>
+			<equals arg1="${what.is.your.name}" arg2="mobile"/>
+			<then>
+				<echo message="My name is mobile."></echo>
+			</then>
+			<elseif>
+				<equals arg1="${what.is.your.name}" arg2="qq"/>
+				<then>
+					<echo message="My name is qq."></echo>
+				</then>
+			</elseif>
+			<elseif>
+				<equals arg1="${what.is.your.name}" arg2="mobile.qq"/>
+				<then>
+					<echo message="My name is mobile.qq"></echo>
+				</then>
+			</elseif>
+			<else>
+				<echo message="I don't know your name."/>
+			</else>
+		</if>
+		
+		<switch value="${what.is.your.name}">
+		  <case value="mobile">
+			<echo message="The value of property is mobile" />
+		  </case>
+		  <case value="qq">
+			<echo message="The value of property is qq" />
+		  </case>
+		  <default>
+			<echo message="The value of property is ${what.is.your.name}" />
+		  </default>
+		</switch>
+		
+		<for list="a,b,c,d,e" param="letter">
+			<sequential>
+				<echo>Letter @{letter}</echo>
+			</sequential>
+		</for>
+		
+		<for param="xmlfile">
+			<fileset dir="${basedir}" includes="**/*.xml"/>
+			
+			<sequential>
+				<!-- copy任务的执行条件：目标文件不存在，或目标文件文件比源文件要旧时，则会执行 -->
+				<copy file="@{xmlfile}" todir="${des_dir}/for"></copy>
+				<echo message="@{xmlfile}"/>
+			</sequential>
+		</for>
+	</target>
+</project>

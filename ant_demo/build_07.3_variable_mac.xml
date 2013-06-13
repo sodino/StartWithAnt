@@ -6,8 +6,9 @@
 <project name="var.project" basedir="." default="var">
 	<taskdef resource="net/sf/antcontrib/antlib.xml">
         <classpath>
-            <pathelement location="Users/sodino/Mission/apache-ant-1.9.1/lib/ant-contrib.jar"/>
+            <pathelement location="/Users/sodino/Mission/apache-ant-1.9.1/lib/ant-contrib.jar"/>
         </classpath>
+
     </taskdef>
 	<target name="var">
         <property name="x" value="6"/>
