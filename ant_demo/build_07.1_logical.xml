@@ -52,6 +52,7 @@
 			</sequential>
 		</ac:for>
 		
+		<property name="des_dir" location="${basedir}/build_07.1_logical"/>
 		<ac:for param="xmlfile" xmlns:ac="antlib:net.sf.antcontrib">
 			<fileset dir="${basedir}" includes="**/*.xml"/>
 			
